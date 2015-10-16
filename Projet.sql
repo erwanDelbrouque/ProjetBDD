@@ -52,7 +52,7 @@ CREATE TABLE Inscription (
 CREATE TABLE Lecon (
   l_id NUMBER(3) CONSTRAINT LECON_PK PRIMARY KEY,
   l_date DATE NOT NULL,
-  l_duree TIME NOT NULL,
+  l_duree DATE NOT NULL,
   l_eleve CONSTRAINT lec_elev_fk references Eleve,
   le_moniteur CONSTRAINT lec_moni_fk references Moniteur
 
