@@ -13,7 +13,7 @@ CREATE TABLE Eleve(
   e_nom VARCHAR2(64) NOT NULL,
   e_prenom VARCHAR2(64)NOT NULL,
   e_date_naiss DATE NOT NULL,
-  e_tel VARCHAR2(10) NOT NULL,
+  e_tel VARCHAR2(10),
   e_date_dossier DATE NOT NULL,
   e_date_code DATE DEFAULT NULL
 );
@@ -39,7 +39,7 @@ CREATE TABLE Inscription (
   i_date_inscr DATE NOT NULL,
   i_type VARCHAR2(20) CONSTRAINT type_check CHECK(i_type IN('classique','supervise','anticipe')),
   i_date_examen DATE DEFAULT NULL,
-  i_resultat NUMBER(2),
+  i_resultat NUMBER(2) DEFAULT NULL,
   i_num NUMBER(2),
   l_eleve CONSTRAINT Insc_Elev_fk REFERENCES Eleve
   
