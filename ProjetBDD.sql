@@ -18,6 +18,7 @@ CREATE TABLE Eleve(
   e_date_code DATE DEFAULT NULL
 );
 
+
 /*
 * Table trajet
 */
@@ -41,22 +42,12 @@ CREATE TABLE Inscription (
   i_date_examen DATE DEFAULT NULL,
   i_resultat NUMBER(2) DEFAULT NULL,
   i_num NUMBER(2),
-  CONSTRAINT resultat_check CHECK(i_resultat IN (0,1)), /* A VOIRRRRRRRRRRRRRRRRRRRRRRRRRR */
+  CONSTRAINT resultat_check CHECK(i_resultat IN (0,1)), /* 0 : Ne l'a pas eu | 1 : l'a eu | NULL : Pas encore passé */
   l_eleve NUMBER(6) CONSTRAINT Insc_Elev_fk REFERENCES Eleve NOT NULL
   
 
 );
 
-/* 
- * Table Lecon
- */
-CREATE TABLE Lecon (
-  l_id NUMBER(3) CONSTRAINT LECON_PK PRIMARY KEY,
-  l_date DATE NOT NULL,
-  l_duree NUMBER(3) NOT NULL,
-  l_eleve CONSTRAINT lec_elev_fk references Eleve NOT NULL,
-  le_moniteur CONSTRAINT lec_moni_fk references Moniteur NOT NULL
-);
 
 /* 
  *Table Moniteur
@@ -66,4 +57,16 @@ CREATE TABLE Moniteur (
   m_nom VARCHAR2(20) NOT NULL,
   m_prenom VARCHAR2(20) NOT NULL
   
+);
+
+
+/* 
+ * Table Lecon
+ */
+CREATE TABLE Lecon (
+  l_id NUMBER(3) CONSTRAINT LECON_PK PRIMARY KEY,
+  l_date DATE NOT NULL,
+  l_duree NUMBER(3) NOT NULL, /* Duree en minutes */
+  l_eleve CONSTRAINT lec_elev_fk references Eleve NOT NULL,
+  le_moniteur CONSTRAINT lec_moni_fk references Moniteur NOT NULL
 );
