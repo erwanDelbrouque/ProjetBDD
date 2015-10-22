@@ -26,7 +26,7 @@ CREATE TABLE Trajet(
   t_date DATE,
   t_nb_km NUMBER(3,1),
   t_type VARCHAR2(20) CONSTRAINT check_type CHECK(t_type IN('route','ville','autoroute')),
-  e_id NUMBER(6) CONSTRAINT e_id_Trajet_FK references Eleve
+  e_id NUMBER(6) CONSTRAINT e_id_Trajet_FK REFERENCES Eleve NOT NULL
 );
 
 
@@ -41,7 +41,8 @@ CREATE TABLE Inscription (
   i_date_examen DATE DEFAULT NULL,
   i_resultat NUMBER(2) DEFAULT NULL,
   i_num NUMBER(2),
-  l_eleve CONSTRAINT Insc_Elev_fk REFERENCES Eleve
+  CONSTRAINT resultat_check CHECK(i_resultat IN (0,1)), /* A VOIRRRRRRRRRRRRRRRRRRRRRRRRRR */
+  l_eleve NUMBER(6) CONSTRAINT Insc_Elev_fk REFERENCES Eleve NOT NULL
   
 
 );
@@ -52,10 +53,9 @@ CREATE TABLE Inscription (
 CREATE TABLE Lecon (
   l_id NUMBER(3) CONSTRAINT LECON_PK PRIMARY KEY,
   l_date DATE NOT NULL,
-  l_duree DATE NOT NULL,
-  l_eleve CONSTRAINT lec_elev_fk references Eleve,
-  le_moniteur CONSTRAINT lec_moni_fk references Moniteur
-
+  l_duree NUMBER(3) NOT NULL,
+  l_eleve CONSTRAINT lec_elev_fk references Eleve NOT NULL,
+  le_moniteur CONSTRAINT lec_moni_fk references Moniteur NOT NULL
 );
 
 /* 
